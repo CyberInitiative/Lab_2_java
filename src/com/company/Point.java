@@ -19,6 +19,9 @@ public class Point {
 
     @Override
     public boolean equals(Object obj) {
+        if(obj.getClass() != this.getClass())
+            return false;
+
         return this.x == ((Point) obj).x && this.y == ((Point) obj).y;
     }
 }

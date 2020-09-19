@@ -9,8 +9,6 @@ public interface ITriangle {
 
     boolean check_existence();
 
-    boolean check_equilateralism();
-
     double find_perimeter();
 
     double find_area();

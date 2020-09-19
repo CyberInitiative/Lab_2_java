@@ -38,7 +38,9 @@ public class Triangle implements ITriangle {
     }
 
     public boolean check_existence() {
-        return find_first_side() + find_second_side() > find_third_side() && find_second_side() + find_third_side() > find_first_side() && find_first_side() + find_third_side() > find_second_side();
+        return (((find_first_side() + find_second_side()) > find_third_side())
+                && ((find_second_side() + find_third_side()) > find_first_side())
+                && ((find_first_side() + find_third_side()) > find_second_side()));
     }
 
     public double find_perimeter() {
@@ -50,11 +52,19 @@ public class Triangle implements ITriangle {
     }
 
     public double find_median() {
-        return 0.5 * Math.round((Math.sqrt((2 * (Math.pow(find_second_side(), 2))) + (2 * (Math.pow(find_third_side(), 2))) - (Math.pow(find_first_side(), 2)))) * 100.0) / 10;
+        return 0.5 * Math.round((Math.sqrt((2 * (Math.pow(find_second_side(), 2))) + (2 * (Math.pow(find_third_side(), 2))) - (Math.pow(find_first_side(), 2)))) * 10.0) / 10;
     }
 
-    public boolean check_equilateralism() {
-        return (find_first_side() == find_second_side()) && (find_first_side() == find_third_side()) && (find_second_side() == find_third_side());
+    public double find_first_angle() {
+        return (Math.pow(find_first_side(), 2) + Math.pow(find_second_side(), 2) - Math.pow(find_third_side(), 2)) / 2 * find_first_side() * find_third_side();
+    }
+
+    public double find_second_angle() {
+        return (Math.pow(find_first_side(), 2) + Math.pow(find_third_side(), 2) - Math.pow(find_second_side(), 2)) / 2 * find_first_side() * find_second_side();
+    }
+
+    public double find_third_angle() {
+        return (Math.pow(find_second_side(), 2) + Math.pow(find_third_side(), 2) - Math.pow(find_first_side(), 2)) / 2 * find_third_side() * find_second_side();
     }
 
     DecimalFormat df = new DecimalFormat("##.##");
@@ -68,6 +78,9 @@ public class Triangle implements ITriangle {
 
     @Override
     public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass())
+            return false;
+
         return this.point_one.equals(((Triangle) obj).getPoint_one())
                 && this.point_two.equals(((Triangle) obj).getPoint_two())
                 && this.point_three.equals(((Triangle) obj).getPoint_three());
