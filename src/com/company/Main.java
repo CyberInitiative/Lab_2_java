@@ -36,9 +36,6 @@ public class Main {
                         triangle.getPoint_one(),
                         triangle.getPoint_two(),
                         triangle.getPoint_three());
-
-
-
                         equilateral_triangles.add(equilateralTriangle);
             }
             catch (RuntimeException ex) {
