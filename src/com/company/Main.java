@@ -6,12 +6,14 @@ public class Main {
     public static void main(String[] args) {
 
         ArrayList<Triangle> triangles = new ArrayList<>();
-        triangles.add(new Triangle(4, 4, 4, 4, -5, 0)); //not exist
+        triangles.add(new Triangle(4, 4, 4, 4, -5, 0)); //does not exist
         triangles.add(new Triangle(0, 5, 4, 0, -5, 0));
+        triangles.add(new Triangle(-2, 3, 2, -3, -5.19615, -3.4641));// equilateral_triangle
         triangles.add(new Triangle(0, 5, 0, 0, -2, 0));
         triangles.add(new Triangle(0, 5, 4, 0, -5, 0));
+        triangles.add(new Triangle(-6, 0, 0, 0, -3, -5.19615));// equilateral_triangle
         triangles.add(new Triangle(0, 2, 4, 0, 0, -3));
-        triangles.add(new Triangle(1, 1, 4, 4, 0, 0)); //not exist
+        triangles.add(new Triangle(1, 1, 4, 4, 0, 0)); //does not exist
         triangles.add(new Triangle(0, 5, 4, 0, -5, 0));
 
         triangles.removeIf(triangle -> !triangle.check_existence());
@@ -27,17 +29,31 @@ public class Main {
         }
         //
         ArrayList<EquilateralTriangle> equilateral_triangles = new ArrayList<>();
-        equilateral_triangles.add(new EquilateralTriangle(-2, 3, 2, -3, -5.19615, -3.4641));
-        equilateral_triangles.add(new EquilateralTriangle(-6, 0, 0, 0, -3, -5.19615));
-        equilateral_triangles.add(new EquilateralTriangle(7, 4, 8, 0, 6, 0));
 
-        equilateral_triangles.removeIf(equilateral_triangle -> !equilateral_triangle.check_existence());
-        equilateral_triangles.removeIf(equilateral_triangle -> !equilateral_triangle.check_equilateralism());
+        for(var triangle: triangles){
+            try {
+                EquilateralTriangle equilateralTriangle = new EquilateralTriangle(
+                        triangle.getPoint_one(),
+                        triangle.getPoint_two(),
+                        triangle.getPoint_three());
 
-        System.out.println("The list of equilateral triangles: ");
 
-        System.out.println(equilateral_triangles);
-        EquilateralTriangle equilateral_triangle = Collections.min(equilateral_triangles, Comparator.comparing(s -> s.find_median()));
-        System.out.println("The lowest value among medians: " + equilateral_triangle.find_median());
+
+                        equilateral_triangles.add(equilateralTriangle);
+            }
+            catch (RuntimeException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        if(triangles.size() > 0) {
+            System.out.println("The list of equilateral triangles: ");
+
+            System.out.println(equilateral_triangles);
+            EquilateralTriangle equilateral_triangle = Collections.min(equilateral_triangles, Comparator.comparing(s -> s.find_median()));
+            System.out.println("The lowest value among medians: " + equilateral_triangle.find_median());
+        }
+        else {
+            System.out.println("No equilateral triangles exist");
+        }
     }
 }

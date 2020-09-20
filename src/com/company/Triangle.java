@@ -13,6 +13,12 @@ public class Triangle implements ITriangle {
         point_three = new Point(x3, y3);
     }
 
+    public Triangle(Point pointOne, Point pointTwo, Point pointThree) {
+        point_one = pointOne;
+        point_two = pointTwo;
+        point_three = pointThree;
+    }
+
     public Point getPoint_one() {
         return point_one;
     }
@@ -73,7 +79,8 @@ public class Triangle implements ITriangle {
     public String toString() {
         return ("The fist side of triangle: " + df.format(find_first_side()) + "; the second side: " + df.format(find_second_side()) +
                 "; the third side: " + df.format(find_third_side()) + "; the median: " + df.format(find_median()) + "; the perimeter: " +
-                df.format(find_perimeter()) + "; the area: " + df.format(find_area()) + "\n");
+                df.format(find_perimeter()) + "; the area: " + df.format(find_area()) +  "the first angle" + df.format(find_first_angle()) +
+                "the second angle" + df.format(find_second_angle()) + "the third angle" + df.format(find_third_angle()) + "\n");
     }
 
     @Override
